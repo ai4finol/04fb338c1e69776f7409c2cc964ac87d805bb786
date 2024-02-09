@@ -66,9 +66,7 @@ plugins:
   - jemoji
 
 gems:
-  - jekyll-authentication
-plugins:
-  - jekyll-authentication
+  - jekyll-auth
 
 google_site_verification: 
 
