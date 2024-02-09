@@ -64,3 +64,9 @@ plugins:
   - jekyll-feed
   - jekyll-readme-index
   - jemoji
+
+gems:
+  - jekyll-authentication
+plugins:
+  - jekyll-authentication
+  
