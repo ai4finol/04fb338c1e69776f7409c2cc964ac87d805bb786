@@ -13,22 +13,24 @@
 
 ## Demo
 
-Live demo on Github Pages: [https://sighingnow.github.io/jekyll-gitbook](https://sighingnow.github.io/jekyll-gitbook)
+``FinOL`` represents a pioneering open database for facilitating data-driven financial research. As an
+ambitious project, it collects and organizes extensive assets from global markets over half a century,
+it provides a long-awaited unified platform to advance data-driven OLPS research.
 
-[![Jekyll Themes](https://img.shields.io/badge/featured%20on-JekyllThemes-red.svg)](https://jekyll-themes.com/jekyll-gitbook/)
 
-## Why Jekyll with GitBook
+## About
 
-GitBook is an amazing frontend style to present and organize contents (such as book chapters
-and blogs) on Web. The typical to deploy GitBook at [Github Pages][1]
-is building HTML files locally and then push to Github repository, usually to the `gh-pages`
-branch. It's quite annoying to repeat such workload and make it hard for people do version
-control via git for when there are generated HTML files to be staged in and out.
-
-This theme takes style definition out of generated GitBook site and provided the template
-for Jekyll to rendering markdown documents to HTML, thus the whole site can be deployed
-to [Github Pages][1] without generating and uploading HTML bundle every time when there are
-changes to the original repo.
+Online portfolio selection (OLPS) is an important issue in operations research community that studies how to dynamically
+adjust portfolios according to market changes. In the past, OLPS research relied on a general database called ``OLPS`` 
+containing price relatives data of financial assets across different markets. However, with the widespread adoption of 
+data-driven technologies like machine learning in finance, ``OLPS`` can no longer meet the needs of OLPS research because 
+due to the lack of support for complex data types, high-dimensional feature spaces, and multi-source data fusion. To solve 
+this problem, we propose ``FinOL``, an open finance database for advancing research in data-driven OLPS. ``FinOL`` expands 
+and enriches the previous ``OLPS`` database, containing 8 benchmark financial datasets from 1962 to present across global 
+markets. To promote fair comparisons, we evaluate a large number of past classic OLPS methods on ``FinOL``, providing 
+reusable benchmark results for future ``FinOL`` users and effectively supporting OLPS research. Importantly, we are 
+committed to regularly updating ``FinOL`` with new data and benchmark results reflecting the latest developments and 
+trends in the field. This ensures ``FinOL`` remains a valuable resource as data-driven OLPS methods continue evolving.
 
 ## How to Get Started
 
