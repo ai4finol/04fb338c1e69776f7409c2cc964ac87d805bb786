@@ -71,3 +71,6 @@ plugins:
   - jekyll-authentication
 
 google_site_verification: 
+
+jekyll_auth:
+  ssl: true
