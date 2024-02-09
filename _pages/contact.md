@@ -6,4 +6,4 @@ category: Jekyll
 layout: post
 ---
 
-For inquiries, please get in touch with us at mailto:finol.official@gmail.com (Monday to Friday, 9:00 AM to 6:00 PM)
+For inquiries, please get in touch with us at mailto:finol.official@gmail.com (Monday to Friday, 9:00 AM to 6:00 PM) 
