@@ -65,9 +65,6 @@ plugins:
   - jekyll-readme-index
   - jemoji
 
-gems:
-  - jekyll-auth
-
 google_site_verification: 
 
 jekyll_auth:
