@@ -1,10 +1,4 @@
----
-layout: home
-title: 
-permalink: /
----
 
-Make Jelly site have a GitBook look!
 
 
 # FinOL: Towards Open Benchmarking for Data-Driven Online Portfolio Selection
