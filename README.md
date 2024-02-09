@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Ai4FinOL
+title: 
 permalink: /
 ---
 
