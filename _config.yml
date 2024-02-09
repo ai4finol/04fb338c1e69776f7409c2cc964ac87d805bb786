@@ -69,4 +69,5 @@ gems:
   - jekyll-authentication
 plugins:
   - jekyll-authentication
-  
+
+google_site_verification: 
