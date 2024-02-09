@@ -1,7 +1,3 @@
----
-layout: home
----
-
 <meta name="robots" content="noindex, nofollow">
 
 
