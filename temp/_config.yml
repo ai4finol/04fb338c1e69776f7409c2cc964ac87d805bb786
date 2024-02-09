@@ -9,8 +9,8 @@ description: >
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://ai4finol.github.io/'
-baseurl:          '/temp'
+url:              'https://ai4finol.github.io/temp'
+baseurl:          '/'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
@@ -42,7 +42,7 @@ markdown_ext:             markdown,mkdown,mkdn,mkd,md
 
 # Permalinks
 # permalink:                /:categories/:year-:month-:day-:title:output_ext
-permalink:                 /temp/
+permalink:                 /temp/:categories/:year-:month-:day-:title:output_ext
 
 # Disqus comments
 # disqushandler:            sighingnow
