@@ -73,3 +73,6 @@ jekyll_auth:
 google_site_verification: 
 
 google_analytics: none
+
+include:
+  - assets/echarts
