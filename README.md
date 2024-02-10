@@ -64,6 +64,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         }
       ],
+      legend: {
+        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+      },
       title: {
         text: 'Daily CW'
       },
