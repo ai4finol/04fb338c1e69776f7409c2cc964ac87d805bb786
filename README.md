@@ -25,7 +25,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var option;
 
   // 从Excel文件中读取数据并处理
-  var file = './assets/daily_cw.xlsx';
+  var file = '/assets/daily_cw.xlsx';
   var reader = new FileReader();
 
   reader.onload = function(e) {
