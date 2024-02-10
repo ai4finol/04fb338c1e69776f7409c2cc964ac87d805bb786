@@ -18,9 +18,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
 <div id="chart" style="width: 600px; height: 400px;"></div>
 
 <script>
-  // 在这里编写你的 ECharts 图表代码
-  // 例如：
-  var chartDom = document.getElementById('chart');
+  var echarts = require('echarts');
+
+  var chartDom = document.getElementById('main');
   var myChart = echarts.init(chartDom);
   var option;
 
@@ -41,7 +41,6 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   };
 
   option && myChart.setOption(option);
-
 </script>
 {% endraw %}
 
