@@ -107,7 +107,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         trigger: 'axis'
       },
       legend: {
-        data: ['Market', 'Best', 'UCRP', 'BCRP', 'Search Engine']
+        data: ['Market', 'Best', 'UCRP', 'BCRP', 'UP']
       },
       grid: {
         left: '3%',
