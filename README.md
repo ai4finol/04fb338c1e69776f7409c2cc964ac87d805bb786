@@ -76,7 +76,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
-          id: 'dataset_of_BCRP',
+          id: 'BCRP',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -88,7 +88,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
-          id: 'dataset_of_UP',
+          id: 'UP',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -100,7 +100,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
-          id: 'dataset_of_EG',
+          id: 'EG',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -112,7 +112,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
-          id: 'dataset_of_SCRP',
+          id: 'SCRP',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -124,7 +124,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
-          id: 'dataset_of_PPT',
+          id: 'PPT',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -206,7 +206,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         {
           name: 'BCRP',
           type: 'line',
-          datasetId: 'dataset_of_BCRP',
+          datasetId: 'BCRP',
           showSymbol: true,
           encode: {
             x: 'Time',
@@ -218,7 +218,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         {
           name: 'UP',
           type: 'line',
-          datasetId: 'dataset_of_UP',
+          datasetId: 'UP',
           showSymbol: true,
           encode: {
             x: 'Time',
@@ -230,7 +230,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         {
           name: 'EG',
           type: 'line',
-          datasetId: 'dataset_of_EG',
+          datasetId: 'EF',
           showSymbol: true,
           encode: {
             x: 'Time',
@@ -242,7 +242,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         {
           name: 'SCRP',
           type: 'line',
-          datasetId: 'dataset_of_SCRP',
+          datasetId: 'SCRP',
           showSymbol: true,
           encode: {
             x: 'Time',
@@ -254,7 +254,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         {
           name: 'PPT',
           type: 'line',
-          datasetId: 'dataset_of_PPT',
+          datasetId: 'PPT',
           showSymbol: true,
           encode: {
             x: 'Time',
