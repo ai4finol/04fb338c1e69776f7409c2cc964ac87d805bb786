@@ -15,11 +15,11 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
 ## Echarts
 
 {% raw %}
-<div id="chart" style="width: 600px; height: 400px;"></div>
+<div id="main" style="width: 600px;height:400px;"></div>
 
-<script>
-  var echarts = require('echarts');
-
+<script type="text/javascript">
+  // 在这里编写你的 ECharts 图表代码
+  // 例如：
   var chartDom = document.getElementById('main');
   var myChart = echarts.init(chartDom);
   var option;
