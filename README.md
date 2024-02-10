@@ -86,6 +86,18 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
               ]
             }
           }
+        },
+        {
+          id: 'dataset_of_UP',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'UP' }
+              ]
+            }
+          }
         }
       ],
       title: {
@@ -158,6 +170,18 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           name: 'BCRP',
           type: 'line',
           datasetId: 'dataset_of_BCRP',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'UP',
+          type: 'line',
+          datasetId: 'dataset_of_UP',
           showSymbol: true,
           encode: {
             x: 'Time',
