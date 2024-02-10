@@ -5,6 +5,7 @@ author:           Jiahao Li
 email:            finol.official@gmail.com
 description: >
   Build Jekyll site with the GitBook style.
+github_username:  ai4finol
 
 version:          1.0
 gitbook_version:  3.2.3
@@ -75,4 +76,4 @@ google_site_verification:
 google_analytics: none
 
 include:
-  - assets/echarts
+  - _assets/echarts
