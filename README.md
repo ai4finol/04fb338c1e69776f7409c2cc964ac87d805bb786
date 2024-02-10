@@ -20,103 +20,91 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
 <script type="text/javascript">
   // 在这里编写你的 ECharts 图表代码
   // 例如：
+  var ROOT_PATH = 'https://ai4finol.github.io';
   var chartDom = document.getElementById('main');
   var myChart = echarts.init(chartDom);
   var option;
-  var ROOT_PATH = 'https://ai4finol.github.io';
 
   $.get(
-    ROOT_PATH + '/js/dcw.json',
+    ROOT_PATH + '/js/life.json',
     function (_rawData) {
       run(_rawData);
     }
   );
-  function run(_rawData) {
-    option = {
-      dataset: [
-        {
-          id: 'dataset_raw',
-          source: _rawData
-        },
-        {
-          id: 'dcw_of_Market',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              { dimension: 'Strategy', '=': 'Market' }
-            }
-          }
-        },
-        {
-          id: 'dcw_of_Best',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              { dimension: 'Strategy', '=': 'Best' }
-            }
+function run(_rawData) {
+  option = {
+    dataset: [
+      {
+        id: 'dataset_raw',
+        source: _rawData
+      },
+      {
+        id: 'dataset_since_1950_of_germany',
+        fromDatasetId: 'dataset_raw',
+        transform: {
+          type: 'filter',
+          config: {
+            and: [
+              { dimension: 'Year', gte: 1950 },
+              { dimension: 'Country', '=': 'Germany' }
+            ]
           }
         }
-      ],
-      title: {
-        // text: 'Daily Cumulative Wealth'
       },
-      tooltip: {
-        trigger: 'axis'
-      },
-      % legend: {
-      %   // data: ['Market', 'Best', 'UCRP', 'BCRP']
-      %   data: ['Market', 'Best']
-      % },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        axisLabel: {
-          interval: 50 // 每50个显示一个标签
-        }
-      },
-      yAxis: {
-        type: 'DCW',
-      },
-      series: [
-        {
-          type: 'line',
-          datasetId: 'dcw_of_Market',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          type: 'line',
-          datasetId: 'dcw_of_Best',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
+      {
+        id: 'dataset_since_1950_of_france',
+        fromDatasetId: 'dataset_raw',
+        transform: {
+          type: 'filter',
+          config: {
+            and: [
+              { dimension: 'Year', gte: 1950 },
+              { dimension: 'Country', '=': 'France' }
+            ]
           }
         }
-      ]
-    };
-    myChart.setOption(option);
-  }
+      }
+    ],
+    title: {
+      text: 'Income of Germany and France since 1950'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'category',
+      nameLocation: 'middle'
+    },
+    yAxis: {
+      name: 'Income'
+    },
+    series: [
+      {
+        type: 'line',
+        datasetId: 'dataset_since_1950_of_germany',
+        showSymbol: false,
+        encode: {
+          x: 'Year',
+          y: 'Income',
+          itemName: 'Year',
+          tooltip: ['Income']
+        }
+      },
+      {
+        type: 'line',
+        datasetId: 'dataset_since_1950_of_france',
+        showSymbol: false,
+        encode: {
+          x: 'Year',
+          y: 'Income',
+          itemName: 'Year',
+          tooltip: ['Income']
+        }
+      }
+    ]
+  };
+  myChart.setOption(option);
+}
 option && myChart.setOption(option);
 </script>
 {% endraw %}
