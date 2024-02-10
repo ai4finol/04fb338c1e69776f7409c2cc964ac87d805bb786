@@ -98,6 +98,42 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
               ]
             }
           }
+        },
+        {
+          id: 'dataset_of_EG',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'EG' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'dataset_of_SCRP',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'SCRP' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'dataset_of_PPT',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'PPT' }
+              ]
+            }
+          }
         }
       ],
       title: {
@@ -107,7 +143,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         trigger: 'axis'
       },
       legend: {
-        data: ['Market', 'Best', 'UCRP', 'BCRP', 'UP']
+        data: ['Market', 'Best', 'UCRP', 'BCRP', 'UP', 'EG', 'SCRP', 'PPT']
       },
       grid: {
         left: '3%',
@@ -182,6 +218,42 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           name: 'UP',
           type: 'line',
           datasetId: 'dataset_of_UP',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'EG',
+          type: 'line',
+          datasetId: 'dataset_of_EG',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'SCRP',
+          type: 'line',
+          datasetId: 'dataset_of_SCRP',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'PPT',
+          type: 'line',
+          datasetId: 'dataset_of_PPT',
           showSymbol: true,
           encode: {
             x: 'Time',
