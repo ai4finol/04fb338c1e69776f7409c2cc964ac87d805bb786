@@ -44,9 +44,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           transform: {
             type: 'filter',
             config: {
-              and: [
-                { dimension: 'Strategy', '=': 'Market' }
-              ]
+              { dimension: 'Strategy', '=': 'Market' }
             }
           }
         },
@@ -56,9 +54,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           transform: {
             type: 'filter',
             config: {
-              and: [
-                { dimension: 'Strategy', '=': 'Best' }
-              ]
+              { dimension: 'Strategy', '=': 'Best' }
             }
           }
         }
