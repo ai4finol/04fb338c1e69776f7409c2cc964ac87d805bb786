@@ -30,7 +30,6 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       run(_rawData);
     }
   );
-
   function run(_rawData) {
     option = {
       dataset: [

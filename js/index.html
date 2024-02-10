@@ -14,41 +14,91 @@
   <div id="chartContainer"></div>
 
   <script src="echarts.min.js"></script>
+  <script src="jquery.min.js"></script>
   <script>
     // 3. 使用Echarts读取CSV数据并创建柱状图
-    var chartContainer = document.getElementById('chartContainer');
-    var myChart = echarts.init(chartContainer);
+    var chartDom = document.getElementById('chartContainer');
+    var myChart = echarts.init(chartDom);
+    var option;
 
-    // 读取CSV文件
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'test.csv', true);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var csvData = xhr.responseText;
-        var lines = csvData.split('\n');
-        var xAxisData = lines[0].split(','); // 第一行为x坐标
-        var seriesData = lines[1].split(','); // 第二行为数据
-
-        // 创建柱状图配置
-        var option = {
-          xAxis: {
-            type: 'category',
-            data: xAxisData
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [{
-            data: seriesData,
-            type: 'bar'
-          }]
-        };
-
-        // 使用配置生成图表
-        myChart.setOption(option);
+    $.get(
+      'dcw.json',
+      function (_rawData) {
+        run(_rawData);
       }
+    );
+  function run(_rawData) {
+    option = {
+      dataset: [
+        {
+          id: 'dataset_raw',
+          source: _rawData
+        },
+        {
+          id: 'dcw_of_Market',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'Market' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'dcw_of_Best',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'Best' }
+              ]
+            }
+          }
+        }
+      ],
+      title: {
+        // text: 'Daily Cumulative Wealth'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      xAxis: {
+        type: 'category',
+        nameLocation: 'middle'
+      },
+      yAxis: {
+        type: 'value',
+      },
+      series: [
+        {
+          type: 'line',
+          datasetId: 'dcw_of_Market',
+          showSymbol: false,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          type: 'line',
+          datasetId: 'dcw_of_Best',
+          showSymbol: false,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        }
+      ]
     };
-    xhr.send();
-  </script>
+    myChart.setOption(option);
+  }
+</script>
 </body>
 </html>
