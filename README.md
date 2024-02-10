@@ -119,8 +119,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         }
       ]
     };
-    option && myChart.setOption(option);
+    myChart.setOption(option);
   }
+option && myChart.setOption(option);
 </script>
 {% endraw %}
 
