@@ -26,7 +26,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var option;
 
   $.get(
-    ROOT_PATH + '/js/dcw.json',
+    ROOT_PATH + '/assets/dcw.json',
     function (_rawData) {
       run(_rawData);
     }
@@ -83,7 +83,10 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       },
       xAxis: {
         type: 'category',
-        nameLocation: 'middle'
+        nameLocation: 'middle',
+        axisLabel: {
+          interval: 50 // 每50个显示一个标签
+        }
       },
       yAxis: {
         name: 'DCW'
