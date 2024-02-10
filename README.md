@@ -25,7 +25,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var option;
 
   $.get(
-    './assets/dcw.json',
+    'dcw.json',
     function (_rawData) {
       run(_rawData);
     }
