@@ -134,6 +134,54 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
               ]
             }
           }
+        },
+        {
+          id: 'ANTI1',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'ANTI1' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'ANTI2',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'ANTI2' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'PAMR',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'PAMR' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'CWMR-Var',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'CWMR-Var' }
+              ]
+            }
+          }
         }
       ],
       title: {
@@ -143,7 +191,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         trigger: 'axis'
       },
       legend: {
-        data: ['Market', 'Best', 'UCRP', 'BCRP', 'UP', 'EG', 'SCRP', 'PPT']
+        data: ['Market', 'Best', 'UCRP', 'BCRP',
+          'UP', 'EG', 'SCRP', 'PPT',
+          'ANTI1', 'ANTI2', 'PAMR', 'CWMR-Var']
       },
       grid: {
         left: '3%',
@@ -255,6 +305,54 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           name: 'PPT',
           type: 'line',
           datasetId: 'PPT',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'ANTI1',
+          type: 'line',
+          datasetId: 'ANTI1',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'ANTI2',
+          type: 'line',
+          datasetId: 'ANTI2',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'PAMR',
+          type: 'line',
+          datasetId: 'PAMR',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'CWMR-Var',
+          type: 'line',
+          datasetId: 'CWMR-Var',
           showSymbol: true,
           encode: {
             x: 'Time',
