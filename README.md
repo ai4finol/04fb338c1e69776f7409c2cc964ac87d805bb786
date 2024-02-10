@@ -62,6 +62,30 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
               ]
             }
           }
+        },
+        {
+          id: 'dataset_of_UCRP',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'UCRP' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'dataset_of_BCRP',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'BCRP' }
+              ]
+            }
+          }
         }
       ],
       title: {
@@ -69,6 +93,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       },
       tooltip: {
         trigger: 'axis'
+      },
+      legend: {
+        data: ['Market', 'Best', 'UCRP', 'BCRP', 'Search Engine']
       },
       grid: {
         left: '3%',
@@ -107,6 +134,30 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           name: 'Best',
           type: 'line',
           datasetId: 'dataset_of_Best',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'UCRP',
+          type: 'line',
+          datasetId: 'dataset_of_UCRP',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          name: 'BCRP',
+          type: 'line',
+          datasetId: 'dataset_of_BCRP',
           showSymbol: true,
           encode: {
             x: 'Time',
