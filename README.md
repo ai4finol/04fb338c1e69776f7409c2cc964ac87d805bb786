@@ -26,16 +26,13 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
 
   option = {
     xAxis: {
-      type: 'category',
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
-    yAxis: {
-      type: 'value'
-    },
+    yAxis: {},
     series: [
       {
-        data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line'
+        type: 'bar',
+        data: [23, 24, 18, 25, 27, 28, 25]
       }
     ]
   };
