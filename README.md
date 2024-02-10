@@ -163,7 +163,8 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         }
       },
       yAxis: {
-        name: 'DCW'
+        name: 'DCW',
+        min: 0.6,  // 设置最小值
       },
       series: [
         { 
