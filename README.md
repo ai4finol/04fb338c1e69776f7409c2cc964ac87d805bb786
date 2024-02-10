@@ -22,7 +22,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   // 例如：
   var chartDom = document.getElementById('chart');
   var myChart = echarts.init(chartDom);
-  var options = {
+  var option;
+
+  option = {
     xAxis: {
       type: 'category',
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -35,9 +37,11 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         data: [150, 230, 224, 218, 135, 147, 260],
         type: 'line'
       }
-  ]
-};
-  myChart.setOption(options);
+    ]
+  };
+
+  option && myChart.setOption(option);
+
 </script>
 {% endraw %}
 
