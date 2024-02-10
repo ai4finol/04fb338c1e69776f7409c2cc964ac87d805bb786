@@ -65,10 +65,21 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         }
       ],
       title: {
-        text: 'Income of Germany and France since 1950'
+        text: 'Daily CW'
       },
       tooltip: {
         trigger: 'axis'
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
       },
       xAxis: {
         type: 'category',
@@ -78,7 +89,8 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         name: 'DCW'
       },
       series: [
-        {
+        { 
+          name: 'Market',
           type: 'line',
           datasetId: 'dataset_since_1950_of_germany',
           showSymbol: true,
