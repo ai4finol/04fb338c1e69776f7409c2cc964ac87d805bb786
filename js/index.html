@@ -20,9 +20,10 @@
     var chartDom = document.getElementById('chartContainer');
     var myChart = echarts.init(chartDom);
     var option;
+    var ROOT_PATH = 'https://ai4finol.github.io';
 
     $.get(
-      'dcw.json',
+      ROOT_PATH + 'life.json',
       function (_rawData) {
         run(_rawData);
       }
@@ -41,7 +42,8 @@
             type: 'filter',
             config: {
               and: [
-                { dimension: 'Strategy', '=': 'Market' }
+              { dimension: 'Year', gte: 1950 },
+              { dimension: 'Country', '=': 'Germany' }
               ]
             }
           }
@@ -53,7 +55,9 @@
             type: 'filter',
             config: {
               and: [
-                { dimension: 'Strategy', '=': 'Best' }
+                // { dimension: 'Strategy', '=': 'Best' }
+                { dimension: 'Year', gte: 1950 },
+                { dimension: 'Country', '=': 'France' }
               ]
             }
           }
@@ -70,7 +74,7 @@
         nameLocation: 'middle'
       },
       yAxis: {
-        type: 'value',
+        type: 'Income',
       },
       series: [
         {
@@ -78,10 +82,10 @@
           datasetId: 'dcw_of_Market',
           showSymbol: false,
           encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
+            x: 'Year',
+            y: 'Income',
+            itemName: 'Year',
+            tooltip: ['Income']
           }
         },
         {
@@ -89,16 +93,18 @@
           datasetId: 'dcw_of_Best',
           showSymbol: false,
           encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
+            x: 'Year',
+            y: 'Income',
+            itemName: 'Year',
+            tooltip: ['Income']
           }
         }
       ]
     };
     myChart.setOption(option);
   }
+
+option && myChart.setOption(option);
 </script>
 </body>
 </html>
