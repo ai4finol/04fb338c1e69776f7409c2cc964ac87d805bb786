@@ -24,40 +24,70 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var myChart = echarts.init(chartDom);
   var option;
 
-  // 从Excel文件中读取数据并处理
-  var file = 'assets/daily_cw.xlsx';
-  var reader = new FileReader();
-
-  reader.onload = function(e) {
-    var data = new Uint8Array(e.target.result);
-    var workbook = XLSX.read(data, { type: 'array' });
-
-    // 处理Excel文件中的数据
-    var sheetName = workbook.SheetNames[0];
-    var sheet = workbook.Sheets[sheetName];
-    var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-    // 提取数据，根据实际情况设置x轴和y轴数据
-    var xAxisData = jsonData[0];  // 假设第一行是x轴的数据
-    var seriesData = jsonData.slice(1);  // 假设从第二行开始是y轴的数据
-
-    option = {
-      xAxis: {
-        // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        data: xAxisData
+  option = {
+    title: {
+      text: 'Stacked Line'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        name: 'Email',
+        type: 'line',
+        stack: 'Total',
+        data: [120, 132, 101, 134, 90, 230, 210]
       },
-      yAxis: {},
-      series: [
-        {
-          type: 'bar',
-          // data: [23, 24, 18, 25, 27, 28, 25]
-          data: seriesData[0]  // 假设第一个数据系列对应第二行数据
-        }
-      ]
-    };
-
-    option && myChart.setOption(option);
+      {
+        name: 'Union Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [220, 182, 191, 234, 290, 330, 310]
+      },
+      {
+        name: 'Video Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [150, 232, 201, 154, 190, 330, 410]
+      },
+      {
+        name: 'Direct',
+        type: 'line',
+        stack: 'Total',
+        data: [320, 332, 301, 334, 390, 330, 320]
+      },
+      {
+        name: 'Search Engine',
+        type: 'line',
+        stack: 'Total',
+        data: [820, 932, 901, 934, 1290, 1330, 1320]
+      }
+    ]
   };
+
+  option && myChart.setOption(option);
 </script>
 {% endraw %}
 

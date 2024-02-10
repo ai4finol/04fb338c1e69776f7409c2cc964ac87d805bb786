@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>ECharts</title>
-    <!-- 引入刚刚下载的 ECharts 文件 -->
-    <script src="echarts.min.js"></script>
-  </head>
-  <body>
-    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-    <div id="main" style="width: 600px;height:400px;"></div>
-    <script type="text/javascript">
-      // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById('main'));
+<head>
+  <meta charset="utf-8">
+  <title>Echarts Bar Chart</title>
+  <style>
+    #chartContainer {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer"></div>
 
-      // 指定图表的配置项和数据
-      var option = {
-        title: {
-          text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-          data: ['销量']
-        },
-        xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-        },
-        yAxis: {},
-        series: [
-          {
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-          }
-        ]
-      };
+  <script src="echarts.min.js"></script>
+  <script>
+    // 3. 使用Echarts读取CSV数据并创建柱状图
+    var chartContainer = document.getElementById('chartContainer');
+    var myChart = echarts.init(chartContainer);
 
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(option);
-    </script>
-  </body>
+    // 读取CSV文件
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'test.csv', true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var csvData = xhr.responseText;
+        var lines = csvData.split('\n');
+        var xAxisData = lines[0].split(','); // 第一行为x坐标
+        var seriesData = lines[1].split(','); // 第二行为数据
+
+        // 创建柱状图配置
+        var option = {
+          xAxis: {
+            type: 'category',
+            data: xAxisData
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            data: seriesData,
+            type: 'bar'
+          }]
+        };
+
+        // 使用配置生成图表
+        myChart.setOption(option);
+      }
+    };
+    xhr.send();
+  </script>
+</body>
 </html>
