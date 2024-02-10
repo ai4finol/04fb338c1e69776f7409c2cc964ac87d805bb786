@@ -40,7 +40,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           source: _rawData
         },
         {
-          id: 'dataset_since_1950_of_germany',
+          id: 'dataset_of_Market',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -52,7 +52,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
-          id: 'dataset_since_1950_of_france',
+          id: 'dataset_of_Best',
           fromDatasetId: 'dataset_raw',
           transform: {
             type: 'filter',
@@ -64,14 +64,14 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         }
       ],
-      legend: {
-        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-      },
       title: {
         text: 'Daily CW'
       },
       tooltip: {
         trigger: 'axis'
+      },
+      legend: {
+        data: ['Market', 'Best', 'Video Ads', 'Direct', 'Search Engine']
       },
       grid: {
         left: '3%',
@@ -86,7 +86,6 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       },
       xAxis: {
         type: 'category',
-        nameLocation: 'middle',
         axisLabel: {
           interval: 50 // 每50个显示一个标签
         }
@@ -98,7 +97,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         { 
           name: 'Market',
           type: 'line',
-          datasetId: 'dataset_since_1950_of_germany',
+          datasetId: 'dataset_of_Market',
           showSymbol: true,
           encode: {
             x: 'Time',
@@ -108,8 +107,9 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         },
         {
+          name: 'Best',
           type: 'line',
-          datasetId: 'dataset_since_1950_of_france',
+          datasetId: 'dataset_of_Best',
           showSymbol: true,
           encode: {
             x: 'Time',
