@@ -26,86 +26,85 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var option;
 
   $.get(
-    ROOT_PATH + '/js/life.json',
+    ROOT_PATH + '/js/dcw.json',
     function (_rawData) {
       run(_rawData);
     }
   );
-function run(_rawData) {
-  option = {
-    dataset: [
-      {
-        id: 'dataset_raw',
-        source: _rawData
-      },
-      {
-        id: 'dataset_since_1950_of_germany',
-        fromDatasetId: 'dataset_raw',
-        transform: {
-          type: 'filter',
-          config: {
-            and: [
-              { dimension: 'Year', gte: 1950 },
-              { dimension: 'Country', '=': 'Germany' }
-            ]
+
+  function run(_rawData) {
+    option = {
+      dataset: [
+        {
+          id: 'dataset_raw',
+          source: _rawData
+        },
+        {
+          id: 'dataset_since_1950_of_germany',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'Market' }
+              ]
+            }
+          }
+        },
+        {
+          id: 'dataset_since_1950_of_france',
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Strategy', '=': 'Best' }
+              ]
+            }
           }
         }
+      ],
+      title: {
+        text: 'Income of Germany and France since 1950'
       },
-      {
-        id: 'dataset_since_1950_of_france',
-        fromDatasetId: 'dataset_raw',
-        transform: {
-          type: 'filter',
-          config: {
-            and: [
-              { dimension: 'Year', gte: 1950 },
-              { dimension: 'Country', '=': 'France' }
-            ]
+      tooltip: {
+        trigger: 'axis'
+      },
+      xAxis: {
+        type: 'category',
+        nameLocation: 'middle'
+      },
+      yAxis: {
+        name: 'DCW'
+      },
+      series: [
+        {
+          type: 'line',
+          datasetId: 'dataset_since_1950_of_germany',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
+          }
+        },
+        {
+          type: 'line',
+          datasetId: 'dataset_since_1950_of_france',
+          showSymbol: true,
+          encode: {
+            x: 'Time',
+            y: 'DCW',
+            itemName: 'Time',
+            tooltip: ['DCW']
           }
         }
-      }
-    ],
-    title: {
-      text: 'Income of Germany and France since 1950'
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    xAxis: {
-      type: 'category',
-      nameLocation: 'middle'
-    },
-    yAxis: {
-      name: 'Income'
-    },
-    series: [
-      {
-        type: 'line',
-        datasetId: 'dataset_since_1950_of_germany',
-        showSymbol: false,
-        encode: {
-          x: 'Year',
-          y: 'Income',
-          itemName: 'Year',
-          tooltip: ['Income']
-        }
-      },
-      {
-        type: 'line',
-        datasetId: 'dataset_since_1950_of_france',
-        showSymbol: false,
-        encode: {
-          x: 'Year',
-          y: 'Income',
-          itemName: 'Year',
-          tooltip: ['Income']
-        }
-      }
-    ]
-  };
-  myChart.setOption(option);
-}
-option && myChart.setOption(option);
+      ]
+    };
+    myChart.setOption(option);
+  }
+  option && myChart.setOption(option);
 </script>
 {% endraw %}
 
