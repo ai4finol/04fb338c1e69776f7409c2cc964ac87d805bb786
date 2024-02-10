@@ -46,9 +46,10 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       }
     },
     xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      // type: 'category',
+      // boundaryGap: false,
+      // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      type: 'value'
     },
     yAxis: {
       type: 'value'
