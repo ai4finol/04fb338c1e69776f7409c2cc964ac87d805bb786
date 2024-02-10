@@ -23,9 +23,10 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var chartDom = document.getElementById('main');
   var myChart = echarts.init(chartDom);
   var option;
+  var ROOT_PATH = 'https://ai4finol.github.io';
 
   $.get(
-    'dcw.json',
+    ROOT_PATH + '/js/dcw.json',
     function (_rawData) {
       run(_rawData);
     }

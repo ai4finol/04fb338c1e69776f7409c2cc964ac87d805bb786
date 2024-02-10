@@ -76,3 +76,4 @@ google_analytics: none
 extra_header_js: 
   - js/echarts.min.js
   - js/xlsx.js
+  - js/jquery.min.js
