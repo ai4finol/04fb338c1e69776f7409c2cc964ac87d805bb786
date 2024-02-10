@@ -15,6 +15,22 @@
 ambitious project, it collects and organizes extensive assets from global markets over half a century,
 it provides a long-awaited unified platform to advance data-driven OLPS research.
 
+## Echarts
+
+{% raw %}
+<div id="chart" style="width: 600px; height: 400px;"></div>
+
+<script>
+  // 在这里编写你的 ECharts 图表代码
+  // 例如：
+  var chartDom = document.getElementById('chart');
+  var myChart = echarts.init(chartDom);
+  var options = {
+    // 在这里定义你的图表配置
+  };
+  myChart.setOption(options);
+</script>
+{% endraw %}
 
 ## How to Get Started
 

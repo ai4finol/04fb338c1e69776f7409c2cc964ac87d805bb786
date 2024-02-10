@@ -70,10 +70,7 @@ plugins:
 jekyll_auth:
   ssl: true
 
-
+# MY Configurations
 google_site_verification: 
-
 google_analytics: none
-
-include:
-  - _assets/echarts
+extra_header_js: /js/echarts.min.js
