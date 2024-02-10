@@ -73,4 +73,6 @@ jekyll_auth:
 # MY Configurations
 google_site_verification: 
 google_analytics: none
-extra_header_js: js/echarts.min.js
+extra_header_js: 
+  - js/echarts.min.js
+  - js/xlsx.js

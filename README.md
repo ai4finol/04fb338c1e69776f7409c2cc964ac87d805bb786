@@ -24,20 +24,40 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   var myChart = echarts.init(chartDom);
   var option;
 
-  option = {
-    xAxis: {
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {},
-    series: [
-      {
-        type: 'bar',
-        data: [23, 24, 18, 25, 27, 28, 25]
-      }
-    ]
-  };
+  // 从Excel文件中读取数据并处理
+  var file = './assets/daily_cw.xlsx';
+  var reader = new FileReader();
 
-  option && myChart.setOption(option);
+  reader.onload = function(e) {
+    var data = new Uint8Array(e.target.result);
+    var workbook = XLSX.read(data, { type: 'array' });
+
+    // 处理Excel文件中的数据
+    var sheetName = workbook.SheetNames[0];
+    var sheet = workbook.Sheets[sheetName];
+    var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+    // 提取数据，根据实际情况设置x轴和y轴数据
+    var xAxisData = jsonData[0];  // 假设第一行是x轴的数据
+    var seriesData = jsonData.slice(1);  // 假设从第二行开始是y轴的数据
+
+    option = {
+      xAxis: {
+        // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: xAxisData
+      },
+      yAxis: {},
+      series: [
+        {
+          type: 'bar',
+          // data: [23, 24, 18, 25, 27, 28, 25]
+          data: seriesData[0]  // 假设第一个数据系列对应第二行数据
+        }
+      ]
+    };
+
+    option && myChart.setOption(option);
+  };
 </script>
 {% endraw %}
 
