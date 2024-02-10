@@ -69,10 +69,10 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       tooltip: {
         trigger: 'axis'
       },
-      legend: {
-        // data: ['Market', 'Best', 'UCRP', 'BCRP']
-        data: ['Market', 'Best']
-      },
+      % legend: {
+      %   // data: ['Market', 'Best', 'UCRP', 'BCRP']
+      %   data: ['Market', 'Best']
+      % },
       grid: {
         left: '3%',
         right: '4%',
