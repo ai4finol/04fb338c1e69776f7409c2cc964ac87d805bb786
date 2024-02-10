@@ -70,9 +70,6 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
       tooltip: {
         trigger: 'axis'
       },
-      legend: {
-        data: ['Market', 'Best', 'Video Ads', 'Direct', 'Search Engine']
-      },
       grid: {
         left: '3%',
         right: '4%',
