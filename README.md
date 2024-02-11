@@ -79,9 +79,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         trigger: 'axis'
       },
       legend: {
-        data: ['Market', 'Best', 'UCRP', 'BCRP',
-          'UP', 'EG', 'SCRP', 'PPT',
-          'ANTI1', 'ANTI2', 'PAMR', 'CWMR-Var']
+        data: strategies
       },
       grid: {
         left: '3%',
