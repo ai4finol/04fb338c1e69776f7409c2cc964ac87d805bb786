@@ -12,6 +12,24 @@
 ambitious project, it collects and organizes extensive assets from global markets over half a century,
 it provides a long-awaited unified platform to advance data-driven OLPS research.
 
+## About
+
+Online portfolio selection (OLPS) is an important issue in operations research community that studies how to dynamically
+adjust portfolios according to market changes. In the past, OLPS research relied on a general database called ``OLPS`` 
+containing price relatives data of financial assets across different markets. However, with the widespread adoption of 
+data-driven technologies like machine learning in finance, ``OLPS`` can no longer meet the needs of OLPS research because 
+due to the lack of support for complex data types, high-dimensional feature spaces, and multi-source data fusion. To solve 
+this problem, we propose ``FinOL``, an open finance database for advancing research in data-driven OLPS. ``FinOL`` expands 
+and enriches the previous ``OLPS`` database, containing 8 benchmark financial datasets from 1962 to present across global 
+markets. To promote fair comparisons, we evaluate a large number of past classic OLPS methods on ``FinOL``, providing 
+reusable benchmark results for future ``FinOL`` users and effectively supporting OLPS research. Importantly, we are 
+committed to regularly updating ``FinOL`` with new data and benchmark results reflecting the latest developments and 
+trends in the field. This ensures ``FinOL`` remains a valuable resource as data-driven OLPS methods continue evolving.
+
+## Contact Us
+
+For inquiries, please get in touch with us at [finol.official@gmail.com](mailto:finol.official@gmail.com) (Monday to Friday, 9:00 AM to 6:00 PM)
+
 <!-- ## Benchmark Results of Daily Cumulative Wealth
 
 {% raw %}
@@ -269,11 +287,11 @@ The example can be previewed from
 
 [https://sighingnow.github.io/jekyll-gitbook/jekyll/2023-08-31-mermaid.html](https://sighingnow.github.io/jekyll-gitbook/jekyll/2023-08-31-mermaid.html) -->
 
-## License
+<!-- ## License
 
 This work is open sourced under the MIT License.
 
-Copyright 2024 Jiahao Li.
+Copyright 2024 Jiahao Li. -->
 
 <!-- [1]: finol.official@gmail.com
 [2]: https://pages.github.com/themes
