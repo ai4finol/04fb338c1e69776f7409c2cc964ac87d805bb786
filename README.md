@@ -12,7 +12,7 @@
 ambitious project, it collects and organizes extensive assets from global markets over half a century,
 it provides a long-awaited unified platform to advance data-driven OLPS research.
 
-## Benchmark Results of Daily Cumulative Wealth
+<!-- ## Benchmark Results of Daily Cumulative Wealth
 
 {% raw %}
 <div id="main" style="width: 900px;height:400px;"></div>
@@ -267,15 +267,15 @@ mermaid: true
 
 The example can be previewed from
 
-[https://sighingnow.github.io/jekyll-gitbook/jekyll/2023-08-31-mermaid.html](https://sighingnow.github.io/jekyll-gitbook/jekyll/2023-08-31-mermaid.html)
+[https://sighingnow.github.io/jekyll-gitbook/jekyll/2023-08-31-mermaid.html](https://sighingnow.github.io/jekyll-gitbook/jekyll/2023-08-31-mermaid.html) -->
 
 ## License
 
-This work is open sourced under the Apache License, Version 2.0.
+This work is open sourced under the MIT License.
 
-Copyright 2019 Tao He.
+Copyright 2024 Jiahao Li.
 
-[1]: finol.official@gmail.com
+<!-- [1]: finol.official@gmail.com
 [2]: https://pages.github.com/themes
 [3]: https://github.com/sighingnow/jekyll-gitbook/fork
 [4]: https://github.com/allejo/jekyll-toc
@@ -288,4 +288,4 @@ Copyright 2019 Tao He.
 [11]: https://discordjs.guide/popular-topics/canvas.html#setting-up-napi-rs-canvas
 [12]: https://rubygems.org/gems/jekyll-remote-theme
 [13]: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
-[14]: https://github.com/sighingnow/jekyll-gitbook/blob/master/_config.yml
+[14]: https://github.com/sighingnow/jekyll-gitbook/blob/master/_config.yml -->
