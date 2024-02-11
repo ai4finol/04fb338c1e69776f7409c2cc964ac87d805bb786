@@ -15,96 +15,197 @@
 
   <script src="echarts.min.js"></script>
   <script src="jquery.min.js"></script>
-  <script>
-    // 3. 使用Echarts读取CSV数据并创建柱状图
-    var chartDom = document.getElementById('chartContainer');
-    var myChart = echarts.init(chartDom);
-    var option;
-    var ROOT_PATH = 'https://ai4finol.github.io';
 
-    $.get(
-      ROOT_PATH + '/js/life.json',
-      function (_rawData) {
-        run(_rawData);
-      }
-    );
+  
+  <div id="main" style="width: 770px;height:1100px;"></div>
+  <script type="text/javascript">
+  // 在这里编写你的 ECharts 图表代码
+  // 例如：
+  var ROOT_PATH = 'https://ai4finol.github.io';
+  var chartDom = document.getElementById('main');
+  var myChart = echarts.init(chartDom);
+  var option;
+  var sizeValue = '55%';
+  var colorPalette = [
+    '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83',
+    '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3', '#c23531'
+  ]
+  $.get(
+    ROOT_PATH + '/assets/dcw.json',
+    function (_rawData) {
+      run(_rawData);
+    }
+  );
+
   function run(_rawData) {
-    option = {
-      dataset: [
-        {
-          id: 'dataset_raw',
-          source: _rawData
-        },
-        {
-          id: 'dcw_of_Market',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-              { dimension: 'Year', gte: 1950 },
-              { dimension: 'Country', '=': 'Germany' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'dcw_of_Best',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                // { dimension: 'Strategy', '=': 'Best' }
-                { dimension: 'Year', gte: 1950 },
-                { dimension: 'Country', '=': 'France' }
-              ]
-            }
+    var strategies = [
+       'Market', 'Best', 'UCRP', 'BCRP',
+       'UP', 'EG', 'SCRP', 'PPT',
+       'ANTI1', 'ANTI2', 'PAMR', 'CWMR-Var', 'CWMR-Stdev', 'OLMAR-S', 'OLMAR-E', 'RMR', 'RPRT',
+       'BK', 'BNN', 'CORN-U', 'CORN-K', 'AICTR', 'KTPT'
+    ];
+    var strategies_BB = [
+       'Market', 'Best', 'UCRP', 'BCRP'
+    ];
+    var strategies_FTW = [
+       'UP', 'EG', 'SCRP', 'PPT'
+    ];
+    var strategies_FTL = [
+       'ANTI1', 'ANTI2', 'PAMR', 'CWMR-Var', 'CWMR-Stdev', 'OLMAR-S', 'OLMAR-E', 'RMR', 'RPRT'
+    ];
+    var strategies_PM = [
+       'BK', 'BNN', 'CORN-U', 'CORN-K', 'AICTR', 'KTPT'
+    ];
+
+    var dataset = strategies.map(function (strategy) {
+      return {
+        id: 'dataset_of_' + strategy,
+        fromDatasetId: 'dataset_raw',
+        transform: {
+          type: 'filter',
+          config: {
+            and: [
+              { dimension: 'Strategy', '=': strategy }
+            ]
           }
         }
-      ],
+      };
+    });
+
+    dataset.unshift({
+      id: 'dataset_raw',
+      source: _rawData
+    });
+
+    var series_BB = strategies_BB.map(function (strategy, index) {
+      return {
+        name: strategy,
+        type: 'line',
+        datasetId: 'dataset_of_' + strategy,
+        showSymbol: false,
+        xAxisIndex: 0,
+        yAxisIndex: 0,
+        encode: {
+          x: 'Time',
+          y: 'DCW',
+          itemName: 'Time',
+          tooltip: ['DCW']
+        },
+        itemStyle: {
+          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
+        }
+      };
+    });
+    var series_FTW = strategies_FTW.map(function (strategy, index) {
+      return {
+        name: strategy,
+        type: 'line',
+        datasetId: 'dataset_of_' + strategy,
+        showSymbol: false,
+        xAxisIndex: 1,
+        yAxisIndex: 1,
+        encode: {
+          x: 'Time',
+          y: 'DCW',
+          itemName: 'Time',
+          tooltip: ['DCW']
+        },
+        itemStyle: {
+          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
+        }
+      };
+    });
+    var series_FTL = strategies_FTL.map(function (strategy, index) {
+      return {
+        name: strategy,
+        type: 'line',
+        datasetId: 'dataset_of_' + strategy,
+        showSymbol: false,
+        xAxisIndex: 2,
+        yAxisIndex: 2,
+        encode: {
+          x: 'Time',
+          y: 'DCW',
+          itemName: 'Time',
+          tooltip: ['DCW']
+        },
+        itemStyle: {
+          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
+        }
+      };
+    });
+    var series_PM = strategies_PM.map(function (strategy, index) {
+      return {
+        name: strategy,
+        type: 'line',
+        datasetId: 'dataset_of_' + strategy,
+        showSymbol: false,
+        xAxisIndex: 3,
+        yAxisIndex: 3,
+        encode: {
+          x: 'Time',
+          y: 'DCW',
+          itemName: 'Time',
+          tooltip: ['DCW']
+        },
+        itemStyle: {
+          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
+        }
+      };
+    });
+
+    option = {
       title: {
-        // text: 'Daily Cumulative Wealth'
+        text: 'NYSE(O)',
+        left: 'center',
+        top: '6%',
       },
+      dataset: dataset,
       tooltip: {
         trigger: 'axis'
       },
-      xAxis: {
-        type: 'category',
-        nameLocation: 'middle'
-      },
-      yAxis: {
-        type: 'Income',
-      },
-      series: [
-        {
-          type: 'line',
-          datasetId: 'dcw_of_Market',
-          showSymbol: false,
-          encode: {
-            x: 'Year',
-            y: 'Income',
-            itemName: 'Year',
-            tooltip: ['Income']
-          }
+      toolbox: {
+        show: true,
+        feature: {
+          dataZoom: {},
+          dataView: { readOnly: true },
+          restore: {},
+          saveAsImage: {}
         },
-        {
-          type: 'line',
-          datasetId: 'dcw_of_Best',
-          showSymbol: false,
-          encode: {
-            x: 'Year',
-            y: 'Income',
-            itemName: 'Year',
-            tooltip: ['Income']
-          }
-        }
+        top: '6%',
+      },
+      legend: [
+        { type: 'scroll', data: strategies }
+      ],
+      grid: [
+        { left: 'center', top: '8%', width: '80%', height: '16%', containLabel: true },
+        { left: 'center', top: '32%', width: '80%', height: '16%', containLabel: true },
+        { left: 'center', top: '56%', width: '80%', height: '16%', containLabel: true },
+        { left: 'center', top: '80%', width: '80%', height: '16%', containLabel: true }
+      ],
+      xAxis: [
+        { gridIndex: 0, type: 'category', axisLabel: { interval: 50 }},
+        { gridIndex: 1, type: 'category', axisLabel: { interval: 50 }},
+        { gridIndex: 2, type: 'category', axisLabel: { interval: 50 }},
+        { gridIndex: 3, type: 'category', axisLabel: { interval: 50 }}
+      ],
+      yAxis: [
+        { type: 'value', gridIndex: 0, name: 'DCW', min: 0.6 },
+        { type: 'value', gridIndex: 1, name: 'DCW', min: 0.6 },
+        { type: 'value', gridIndex: 2, name: 'DCW', min: 0.6 },
+        { type: 'value', gridIndex: 3, name: 'DCW', min: 0.6 }
+      ],
+      series: [
+        ...series_BB,
+        ...series_FTW,
+        ...series_FTL,
+        ...series_PM
       ]
     };
     myChart.setOption(option);
   }
-
-option && myChart.setOption(option);
+  option && myChart.setOption(option);
+  
 </script>
 </body>
 </html>
