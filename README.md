@@ -33,157 +33,48 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
   );
 
   function run(_rawData) {
-    option = {
-      dataset: [
-        {
-          id: 'dataset_raw',
-          source: _rawData
-        },
-        {
-          id: 'dataset_of_Market',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'Market' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'dataset_of_Best',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'Best' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'dataset_of_UCRP',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'UCRP' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'BCRP',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'BCRP' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'UP',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'UP' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'EG',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'EG' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'SCRP',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'SCRP' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'PPT',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'PPT' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'ANTI1',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'ANTI1' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'ANTI2',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'ANTI2' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'PAMR',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'PAMR' }
-              ]
-            }
-          }
-        },
-        {
-          id: 'CWMR-Var',
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'Strategy', '=': 'CWMR-Var' }
-              ]
-            }
+    var strategies = [
+      'Market', 'Best', 'UCRP', 'BCRP', 'UP',
+      'EG', 'SCRP', 'PPT', 'ANTI1', 'ANTI2', 'PAMR'
+    ];
+
+    var dataset = strategies.map(function (strategy) {
+      return {
+        id: 'dataset_of_' + strategy,
+        fromDatasetId: 'dataset_raw',
+        transform: {
+          type: 'filter',
+          config: {
+            and: [
+              { dimension: 'Strategy', '=': strategy }
+            ]
           }
         }
-      ],
+      };
+    });
+
+    dataset.unshift({
+      id: 'dataset_raw',
+      source: _rawData
+    });
+    
+    var series = strategies.map(function (strategy) {
+      return {
+        name: strategy,
+        type: 'line',
+        datasetId: 'dataset_of_' + strategy,
+        showSymbol: true,
+        encode: {
+          x: 'Time',
+          y: 'DCW',
+          itemName: 'Time',
+          tooltip: ['DCW']
+        }
+      };
+    });
+
+    option = {
+      dataset: dataset,
       tooltip: {
         trigger: 'axis'
       },
@@ -213,152 +104,7 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
         name: 'DCW',
         min: 0.6,  // 设置最小值
       },
-      series: [
-        { 
-          name: 'Market',
-          type: 'line',
-          datasetId: 'dataset_of_Market',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'Best',
-          type: 'line',
-          datasetId: 'dataset_of_Best',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'UCRP',
-          type: 'line',
-          datasetId: 'dataset_of_UCRP',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'BCRP',
-          type: 'line',
-          datasetId: 'BCRP',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'UP',
-          type: 'line',
-          datasetId: 'UP',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'EG',
-          type: 'line',
-          datasetId: 'EF',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'SCRP',
-          type: 'line',
-          datasetId: 'SCRP',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'PPT',
-          type: 'line',
-          datasetId: 'PPT',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'ANTI1',
-          type: 'line',
-          datasetId: 'ANTI1',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'ANTI2',
-          type: 'line',
-          datasetId: 'ANTI2',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'PAMR',
-          type: 'line',
-          datasetId: 'PAMR',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        },
-        {
-          name: 'CWMR-Var',
-          type: 'line',
-          datasetId: 'CWMR-Var',
-          showSymbol: true,
-          encode: {
-            x: 'Time',
-            y: 'DCW',
-            itemName: 'Time',
-            tooltip: ['DCW']
-          }
-        }
-      ]
+      series: series
     };
     myChart.setOption(option);
   }
