@@ -158,7 +158,7 @@
       title: {
         text: 'NYSE(O)',
         left: 'center',
-        top: '6%',
+        top: '2%',
       },
       dataset: dataset,
       tooltip: {
@@ -172,16 +172,16 @@
           restore: {},
           saveAsImage: {}
         },
-        top: '6%',
+        top: '2%',
       },
-      legend: [
-        { type: 'scroll', data: strategies }
-      ],
+      // legend: [
+      //   { type: 'scroll', data: strategies }
+      // ],
       grid: [
-        { left: 'center', top: '8%', width: '80%', height: '16%', containLabel: true },
-        { left: 'center', top: '32%', width: '80%', height: '16%', containLabel: true },
-        { left: 'center', top: '56%', width: '80%', height: '16%', containLabel: true },
-        { left: 'center', top: '80%', width: '80%', height: '16%', containLabel: true }
+        { left: 'center', top: '8%', width: '90%', height: '16%', containLabel: true },
+        { left: 'center', top: '32%', width: '90%', height: '16%', containLabel: true },
+        { left: 'center', top: '56%', width: '90%', height: '16%', containLabel: true },
+        { left: 'center', top: '80%', width: '90%', height: '16%', containLabel: true }
       ],
       xAxis: [
         { gridIndex: 0, type: 'category', axisLabel: { interval: 50 }},
@@ -200,7 +200,14 @@
         ...series_FTW,
         ...series_FTL,
         ...series_PM
+      ],
+      legend: [
+        { top: '4.5%', width: '70%', type: 'scroll', data: strategies_BB },
+        { top: '28.5%', width: '70%', type: 'scroll', data: strategies_FTW },
+        { top: '52.5%', width: '70%', type: 'scroll', data: strategies_FTL },
+        { top: '76.5%', width: '70%', type: 'scroll', data: strategies_PM },
       ]
+      
     };
     myChart.setOption(option);
   }
