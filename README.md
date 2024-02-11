@@ -184,9 +184,6 @@ it provides a long-awaited unified platform to advance data-driven OLPS research
           }
         }
       ],
-      title: {
-        % text: 'Daily CW'
-      },
       tooltip: {
         trigger: 'axis'
       },
