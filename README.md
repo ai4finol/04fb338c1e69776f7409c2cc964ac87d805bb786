@@ -12,7 +12,7 @@
 ambitious project, it collects and organizes extensive assets from global markets over half a century,
 it provides a long-awaited unified platform to advance data-driven OLPS research.
 
-## Echarts
+## Benchmark Results of Daily Cumulative Wealth
 
 {% raw %}
 <div id="main" style="width: 900px;height:400px;"></div>
