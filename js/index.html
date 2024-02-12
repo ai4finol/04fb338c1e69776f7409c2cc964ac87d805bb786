@@ -1,29 +1,58 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['table']});
-      google.charts.setOnLoadCallback(drawTable);
+<head>
+  <style>
+    #table_div {
+      width: 220px;
+      height: 1300px;
+    }
+  </style>
+</head>
+  <meta charset="utf-8">
 
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Name');
-        data.addColumn('number', 'Salary');
-        data.addColumn('boolean', 'Full Time Employee');
-        data.addRows([
-          ['Mike',  {v: 10000, f: '$10,000'}, true],
-          ['Jim',   {v:8000,   f: '$8,000'},  false],
-          ['Alice', {v: 12500, f: '$12,500'}, true],
-          ['Bob',   {v: 7000,  f: '$7,000'},  true]
-        ]);
+  <title>Sortable Table with Google Charts</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['table']});
+    google.charts.setOnLoadCallback(drawTable);
 
-        var table = new google.visualization.Table(document.getElementById('table_div'));
+    function drawTable() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Name');
+      data.addColumn('string', 'Market');
+      data.addColumn('string', 'Country/Region');
+      data.addColumn('string', 'Data Frequency');
 
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-      }
-    </script>
-  </head>
-  <body>
-    <div id="table_div"></div>
-  </body>
+      data.addRows([
+        ['NYSE(O)', 'Stock', 'United States', 'Daily'],
+        ['NASDAQ', 'Stock', 'United States', 'Daily'],
+        ['LSE', 'Stock', 'United Kingdom', 'Daily'],
+        ['TSE', 'Stock', 'Japan', 'Daily'],  
+        ['NASDAQ', 'Stock', 'United States', 'Daily']
+        // 表格的其他行
+      ]);
+
+      var options = {
+        showRowNumber: false,
+        sort: 'event',
+        sortAscending: true,
+        allowHtml: false,
+        fontSize: 'x-large'
+      };
+
+      var table = new google.visualization.Table(document.getElementById('table_div'));
+
+      google.visualization.events.addListener(table, 'sort', function(e) {
+        var columnIndex = e.column;
+        var sortAscending = e.ascending;
+        data.sort([{column: columnIndex, desc: !sortAscending}]);
+        table.draw(data, options);
+      });
+
+      table.draw(data, options);
+    }
+  </script>
+<body>
+  <div id="table_div"></div>
+</body>
 </html>
