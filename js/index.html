@@ -2,217 +2,66 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Echarts Bar Chart</title>
-  <style>
-    #chartContainer {
-      width: 600px;
-      height: 400px;
+  <title>Sortable Table with Google Charts</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['table']});
+    google.charts.setOnLoadCallback(drawTable);
+
+    function drawTable() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Name');
+      data.addColumn('string', 'Market');
+      data.addColumn('string', 'Country/Region');
+      data.addColumn('string', 'Data Frequency');
+      data.addColumn('number', '# of assets');
+      data.addColumn('string', 'Data Range');
+      data.addColumn('string', '# of total periods');
+      data.addColumn('number', '# of features');
+
+      data.addRows([
+        ['NYSE(O)', 'Stock', 'United States', 'Daily', 9, '03/July/1962 - 31/Dec/1984', '5,651: 5,085/283/283', 16],
+        ['NASDAQ', 'Stock', 'United States', 'Daily', 10, '02/Jan/1972 - 29/Dec/2017', '11,312: 10,283/283/283', 18],
+        ['LSE', 'Stock', 'United Kingdom', 'Daily', 7, '15/Sep/1986 - 31/Dec/2017', '7,039: 6,046/283/283', 15],
+        ['TSE', 'Stock', 'Japan', 'Daily', 11, '01/Jan/1963 - 30/Dec/2017', '15,446: 14,418/283/283', 17],  
+        ['NASDAQ', 'Stock', 'United States', 'Daily', 10, '02/Jan/1972 - 29/Dec/2017', '11,312: 10,283/283/283', 18],
+        ['LSE', 'Stock', 'United Kingdom', 'Daily', 7, '15/Sep/1986 - 31/Dec/2017', '7,039: 6,046/283/283', 15],
+        ['TSE', 'Stock', 'Japan', 'Daily', 11, '01/Jan/1963 - 30/Dec/2017', '15,446: 14,418/283/283', 17],
+        ['SSE', 'Stock', 'China', 'Daily', 8, '19/Jul/1990 - 31/Dec/2017', '6,879: 6,214/283/283', 14],
+        ['SIX', 'Stock', 'Switzerland', 'Daily', 5, '02/Jan/1980 - 29/Dec/2017', '4,982: 4,282/283/283', 12],
+        ['BSE', 'Stock', 'India', 'Daily', 12, '03/Jan/1994 - 29/Dec/2017', '19,846: 18,798/283/283', 19]
+        // 表格的其他行
+      ]);
+
+      var options = {
+        showRowNumber: false,
+        sort: 'event',
+        sortAscending: true,
+        allowHtml: true,
+        title: 'Basic Statistics of FinOL Database' // 设置表格标题
+      };
+
+      var table = new google.visualization.Table(document.getElementById('table_div'));
+
+      google.visualization.events.addListener(table, 'sort', function(e) {
+        var columnIndex = e.column;
+        var sortAscending = e.ascending;
+        data.sort([{column: columnIndex, desc: !sortAscending}]);
+        table.draw(data, options);
+      });
+
+      table.draw(data, options);
+
+      // 添加标题
+      var tableContainer = document.getElementById('table_container');
+      var titleElement = document.createElement('div');
+      titleElement.id = 'table_title';
+      titleElement.innerHTML = 'Basic Statistics of FinOL Database';
+      tableContainer.insertBefore(titleElement, tableContainer.firstChild);
     }
-  </style>
+  </script>
 </head>
 <body>
-  <div id="chartContainer"></div>
-
-  <script src="echarts.min.js"></script>
-  <script src="jquery.min.js"></script>
-
-  
-  <div id="main" style="width: 770px;height:1100px;"></div>
-  <script type="text/javascript">
-  // 在这里编写你的 ECharts 图表代码
-  // 例如：
-  var ROOT_PATH = 'https://ai4finol.github.io';
-  var chartDom = document.getElementById('main');
-  var myChart = echarts.init(chartDom);
-  var option;
-  var sizeValue = '55%';
-  var colorPalette = [
-    '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83',
-    '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3', '#c23531'
-  ]
-  $.get(
-    ROOT_PATH + '/assets/dcw.json',
-    function (_rawData) {
-      run(_rawData);
-    }
-  );
-
-  function run(_rawData) {
-    var strategies = [
-       'Market', 'Best', 'UCRP', 'BCRP',
-       'UP', 'EG', 'SCRP', 'PPT',
-       'ANTI1', 'ANTI2', 'PAMR', 'CWMR-Var', 'CWMR-Stdev', 'OLMAR-S', 'OLMAR-E', 'RMR', 'RPRT',
-       'BK', 'BNN', 'CORN-U', 'CORN-K', 'AICTR', 'KTPT'
-    ];
-    var strategies_BB = [
-       'Market', 'Best', 'UCRP', 'BCRP'
-    ];
-    var strategies_FTW = [
-       'UP', 'EG', 'SCRP', 'PPT'
-    ];
-    var strategies_FTL = [
-       'ANTI1', 'ANTI2', 'PAMR', 'CWMR-Var', 'CWMR-Stdev', 'OLMAR-S', 'OLMAR-E', 'RMR', 'RPRT'
-    ];
-    var strategies_PM = [
-       'BK', 'BNN', 'CORN-U', 'CORN-K', 'AICTR', 'KTPT'
-    ];
-
-    var dataset = strategies.map(function (strategy) {
-      return {
-        id: 'dataset_of_' + strategy,
-        fromDatasetId: 'dataset_raw',
-        transform: {
-          type: 'filter',
-          config: {
-            and: [
-              { dimension: 'Strategy', '=': strategy }
-            ]
-          }
-        }
-      };
-    });
-
-    dataset.unshift({
-      id: 'dataset_raw',
-      source: _rawData
-    });
-
-    var series_BB = strategies_BB.map(function (strategy, index) {
-      return {
-        name: strategy,
-        type: 'line',
-        datasetId: 'dataset_of_' + strategy,
-        showSymbol: false,
-        xAxisIndex: 0,
-        yAxisIndex: 0,
-        encode: {
-          x: 'Time',
-          y: 'DCW',
-          itemName: 'Time',
-          tooltip: ['DCW']
-        },
-        itemStyle: {
-          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
-        }
-      };
-    });
-    var series_FTW = strategies_FTW.map(function (strategy, index) {
-      return {
-        name: strategy,
-        type: 'line',
-        datasetId: 'dataset_of_' + strategy,
-        showSymbol: false,
-        xAxisIndex: 1,
-        yAxisIndex: 1,
-        encode: {
-          x: 'Time',
-          y: 'DCW',
-          itemName: 'Time',
-          tooltip: ['DCW']
-        },
-        itemStyle: {
-          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
-        }
-      };
-    });
-    var series_FTL = strategies_FTL.map(function (strategy, index) {
-      return {
-        name: strategy,
-        type: 'line',
-        datasetId: 'dataset_of_' + strategy,
-        showSymbol: false,
-        xAxisIndex: 2,
-        yAxisIndex: 2,
-        encode: {
-          x: 'Time',
-          y: 'DCW',
-          itemName: 'Time',
-          tooltip: ['DCW']
-        },
-        itemStyle: {
-          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
-        }
-      };
-    });
-    var series_PM = strategies_PM.map(function (strategy, index) {
-      return {
-        name: strategy,
-        type: 'line',
-        datasetId: 'dataset_of_' + strategy,
-        showSymbol: false,
-        xAxisIndex: 3,
-        yAxisIndex: 3,
-        encode: {
-          x: 'Time',
-          y: 'DCW',
-          itemName: 'Time',
-          tooltip: ['DCW']
-        },
-        itemStyle: {
-          color: colorPalette[index % colorPalette.length] // 设置系列的颜色
-        }
-      };
-    });
-
-    option = {
-      title: {
-        text: 'NYSE(O)',
-        left: 'center',
-        top: '2%',
-      },
-      dataset: dataset,
-      tooltip: {
-        trigger: 'axis'
-      },
-      toolbox: {
-        show: true,
-        feature: {
-          dataZoom: {},
-          dataView: { readOnly: true },
-          restore: {},
-          saveAsImage: {}
-        },
-        top: '2%',
-      },
-      // legend: [
-      //   { type: 'scroll', data: strategies }
-      // ],
-      grid: [
-        { left: 'center', top: '8%', width: '90%', height: '16%', containLabel: true },
-        { left: 'center', top: '32%', width: '90%', height: '16%', containLabel: true },
-        { left: 'center', top: '56%', width: '90%', height: '16%', containLabel: true },
-        { left: 'center', top: '80%', width: '90%', height: '16%', containLabel: true }
-      ],
-      xAxis: [
-        { gridIndex: 0, type: 'category', axisLabel: { interval: 50 }},
-        { gridIndex: 1, type: 'category', axisLabel: { interval: 50 }},
-        { gridIndex: 2, type: 'category', axisLabel: { interval: 50 }},
-        { gridIndex: 3, type: 'category', axisLabel: { interval: 50 }}
-      ],
-      yAxis: [
-        { type: 'value', gridIndex: 0, name: 'DCW', min: 0.6 },
-        { type: 'value', gridIndex: 1, name: 'DCW', min: 0.6 },
-        { type: 'value', gridIndex: 2, name: 'DCW', min: 0.6 },
-        { type: 'value', gridIndex: 3, name: 'DCW', min: 0.6 }
-      ],
-      series: [
-        ...series_BB,
-        ...series_FTW,
-        ...series_FTL,
-        ...series_PM
-      ],
-      legend: [
-        { top: '4.5%', width: '70%', type: 'scroll', data: strategies_BB },
-        { top: '28.5%', width: '70%', type: 'scroll', data: strategies_FTW },
-        { top: '52.5%', width: '70%', type: 'scroll', data: strategies_FTL },
-        { top: '76.5%', width: '70%', type: 'scroll', data: strategies_PM },
-      ]
-      
-    };
-    myChart.setOption(option);
-  }
-  option && myChart.setOption(option);
-  
-</script>
+  <div id="table_div"></div>
 </body>
 </html>
